@@ -1,69 +1,67 @@
 const {
   SlashCommandBuilder,
-  EmbedBuilder,
   MessageFlags,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  InteractionContextType,
 } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("embed")
-    .setDescription("spam embed mesaj gonderir.")
+    .setDescription("Spam obnoxious embed messages to clutter the chat.")
+    .setContexts(InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel)
     .addIntegerOption((option) =>
       option
         .setName("count")
-        .setDescription("kac kere gonderilsin? sayi giriniz (max 5)")
+        .setDescription("How many embeds to spam? (Max 10, try not to crash it)")
         .setRequired(true)
         .setMinValue(1)
-        .setMaxValue(5)
+        .setMaxValue(10)
     )
     .addStringOption((option) =>
       option
         .setName("title")
-        .setDescription("embed icin baslik giriniz.")
+        .setDescription("The title of your spam embed.")
         .setRequired(true)
         .setMaxLength(100)
     )
     .addStringOption((option) =>
       option
         .setName("description")
-        .setDescription(
-          "embed icin aciklama giriniz. (\\n ile alt satira gecebilirsiniz)"
-        )
+        .setDescription("The description of your spam embed. (\\n for newlines)")
         .setRequired(true)
         .setMaxLength(1000)
     )
     .addStringOption((option) =>
       option
         .setName("footer")
-        .setDescription(
-          "embed icin alt bilgi giriniz. (\\n ile alt satira gecebilirsiniz)"
-        )
+        .setDescription("Footer text for the embed. (\\n for newlines)")
         .setRequired(false)
         .setMaxLength(100)
     )
     .addStringOption((option) =>
       option
         .setName("color")
-        .setDescription("embed icin renk giriniz (hex code)")
+        .setDescription("Color hex code (default is pitch black)")
         .setRequired(false)
     )
     .addStringOption((option) =>
       option
         .setName("content")
-        .setDescription(
-          "ekstra metin icin giriniz (\\n ile alt satira gecebilirsiniz)"
-        )
+        .setDescription("Additional text content outside the embed. (\\n for newlines)")
         .setRequired(false)
         .setMaxLength(100)
     )
     .addStringOption((option) =>
       option
         .setName("image")
-        .setDescription("resim url giriniz")
+        .setDescription("Some image URL to spam.")
         .setRequired(false)
     ),
   /**
-   *
    * @param {import("discord.js").ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
@@ -78,43 +76,57 @@ module.exports = {
       interaction.options.getString("content")?.replace(/\\n/g, "\n") || "";
     const imageUrl = interaction.options.getString("image");
 
-    let sent = 0;
-    await interaction.reply({
-      content: `[+] baslatiliyor..`,
-      flags: MessageFlags.Ephemeral,
+    // Console UI embed shown only to the user
+    const buildConsoleEmbed = (status) =>
+      new EmbedBuilder()
+        .setTitle("embed spam")
+        .setDescription(`gonna blast this embed **${count}x** into the chat, check the preview below`)
+        .addFields(
+          { name: "how many", value: `${count}x`, inline: true },
+          { name: "status", value: status, inline: true }
+        )
+        .setColor("#a1a1a1")
+        .setTimestamp();
+
+    // Build the actual spam embed (preview)
+    const buildSpamEmbed = () => {
+      const e = new EmbedBuilder()
+        .setTitle(title)
+        .setDescription(description)
+        .setColor(color)
+        .setTimestamp();
+      if (footer) e.setFooter({ text: footer });
+      if (imageUrl) e.setImage(imageUrl);
+      return e;
+    };
+
+    const getRow = (disabled) =>
+      new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("start_embed")
+          .setLabel(disabled ? "sending..." : "send it")
+          .setStyle(ButtonStyle.Danger)
+          .setDisabled(disabled)
+      );
+
+    // Store session so button handler in interactionCreate.js can access it
+    if (!interaction.client.spamSessions) {
+      interaction.client.spamSessions = new Map();
+    }
+    interaction.client.spamSessions.set(interaction.user.id, {
+      type: "embed",
+      count,
+      content,
+      buildConsoleEmbed,
+      buildSpamEmbed,
+      getRow,
+      originalInteraction: interaction,
     });
 
-    const interval = setInterval(async () => {
-      try {
-        if (sent >= count) {
-          clearInterval(interval);
-          return;
-        }
-
-        sent++;
-        const embed = new EmbedBuilder()
-          .setTitle(title)
-          .setDescription(description)
-          .setColor(color)
-          .setTimestamp();
-
-        if (imageUrl) {
-          embed.setImage(imageUrl);
-        }
-
-        if (footer) {
-          embed.setFooter({ text: footer });
-        }
-
-        await interaction.followUp({
-          content: content,
-          embeds: [embed],
-          allowedMentions: { parse: ["everyone", "roles", "users"] },
-        });
-      } catch (error) {
-        console.error("Error in interval:", error);
-        clearInterval(interval);
-      }
-    }, 1000);
+    await interaction.reply({
+      embeds: [buildConsoleEmbed("Awaiting confirmation..."), buildSpamEmbed()],
+      components: [getRow(false)],
+      flags: MessageFlags.Ephemeral,
+    });
   },
 };

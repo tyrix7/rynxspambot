@@ -13,27 +13,38 @@ for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
   if ("data" in command && "execute" in command) {
-    const commandData = command.data.toJSON();
-    commandData.dm_permission = true;
-    commands.push(commandData);
+    commands.push(command.data.toJSON());
   }
 }
 
 const rest = new REST().setToken(process.env.TOKEN);
 
+let clientId = process.env.CLIENT_ID;
+if (!clientId && process.env.TOKEN) {
+  try {
+    clientId = Buffer.from(process.env.TOKEN.split('.')[0], 'base64').toString('utf-8');
+  } catch (err) {
+    console.error("[!] Failed to decode CLIENT_ID from TOKEN:", err.message);
+  }
+}
+
 (async () => {
   try {
+    if (!clientId) {
+      throw new Error("CLIENT_ID is missing and could not be parsed from TOKEN.");
+    }
+
     console.log(
-      `[?] baslatiliyor.. ${commands.length} adet slash komutu yukleniyor..`
+      `[?] Initializing... Uploading ${commands.length} annoying slash commands for application ${clientId}...`
     );
 
     const data = await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID),
+      Routes.applicationCommands(clientId),
       { body: commands }
     );
 
     console.log(
-      `[+] basariyla ${data.length} application slash komutlarini yeniledim.`
+      `[+] Loaded ${data.length} slash commands successfully. Ready to spam.`
     );
   } catch (error) {
     console.error(error);

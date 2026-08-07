@@ -1,71 +1,141 @@
-# Discord Spam Bot
+# Rynex™ — Discord Bot
 
-A Discord User Application that allows you to send spam messages without requiring bot permissions or adding a bot to your guild.
+> A powerful Discord slash command bot with chaos-themed utilities, troll effects, and server tools.
 
-## Features
+---
 
-- Send spam messages using Discord's User Application
-- Customizable spam settings
-- Embed message support
-- Simple and easy-to-use commands
+## ✨ Features
 
-## Prerequisites
+| Command | Description |
+|---|---|
+| `/spam` | Spam messages in a channel with custom settings |
+| `/embed` | Send fully customized embedded messages |
+| `/hello` | Test command to verify the bot is alive |
+| `/ghost_ping` | Ghost ping a user (ping then instantly delete) |
+| `/blame` | Blame a user with a custom reason |
+| `/raid` | Channel raid utility |
+| `/dm_raid` | DM raid utility |
+| `/troll_fx` | Ultra-realistic visual troll effects (Fake Hack, Virus Scan, Countdown, Glitch, Crash, ASCII Art) |
 
-- Node.js 16.x or higher
-- pnpm package manager
-- Discord Account
+---
 
-## Installation
+## 🛠️ Prerequisites
 
-1. Clone the repository:
+- **Node.js** v18.x or higher
+- **npm** package manager
+- A Discord Bot Token with the following intents enabled:
+  - `GUILDS`
+  - `GUILD_MEMBERS`
+  - `GUILD_MESSAGES`
+  - `MESSAGE_CONTENT`
 
+---
+
+## 🚀 Installation
+
+**1. Clone the repo:**
 ```bash
 git clone https://github.com/byigitt/discord-spam-bot.git
 cd discord-spam-bot
 ```
 
-2. Install dependencies:
-
+**2. Install dependencies:**
 ```bash
-pnpm install
+npm install
 ```
 
-3. Create a `.env` file based on `.env.example`:
-
+**3. Set up your environment:**
 ```bash
 cp .env.example .env
 ```
 
-4. Fill in your Discord token and other required information in the `.env` file.
-
-## Available Commands
-
-- `/spam` - Start spamming messages in a channel
-- `/embed` - Send embedded messages
-- `/hello` - Test command to verify the bot is working
-
-## Usage
-
-1. Deploy the commands:
-
-```bash
-pnpm deploy-commands
+Then fill in `.env`:
+```env
+DISCORD_TOKEN=your_bot_token_here
+CLIENT_ID=your_application_id_here
+MAIN_GUILD_ID=your_guild_id_here
 ```
 
-2. Start the application:
+---
 
+## ⚙️ Usage
+
+**Deploy slash commands to Discord:**
 ```bash
-pnpm start
+npm run deploy-commands
 ```
 
-## ⚠️ Disclaimer
+**Start the bot:**
+```bash
+npm start
+```
 
-This tool is for educational purposes only. Using self-bots or automated user accounts is against Discord's Terms of Service. Use at your own risk.
+**Dev mode (auto-restart on file changes):**
+```bash
+npm run dev
+```
 
-## License
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🎭 `/troll_fx` Effects
 
-## Author
+| Effect | What it does |
+|---|---|
+| **Fake Hack (Terminal)** | Multi-frame animated terminal showing fake exploit injection, credential dump, and reverse shell — uses target's real username & ID |
+| **Virus Scan (Fake)** | Fake Windows Defender scan finding a fake trojan/ransomware |
+| **Countdown (Deletion)** | Countdown timer followed by a "force wipe complete" report |
+| **Glitch Text (Zalgo)** | Corrupts text with Zalgo unicode characters at adjustable intensity |
+| **Crash Text (Lag)** | BSOD + kernel panic + boot loop crash sequence |
+| **ASCII Art** | Renders skull, troll face, or warning sign in a code block |
 
-[byigitt](https://github.com/byigitt)
+> All effects are **purely visual**. Nothing is actually executed on any device.
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── commands/          # Slash command handlers
+│   ├── spam.js
+│   ├── embed.js
+│   ├── hello.js
+│   ├── ghost_ping.js
+│   ├── blame.js
+│   ├── raid.js
+│   ├── dm_raid.js
+|   ├── cleardm.js
+|   ├── fuck.js
+│   └── troll_fx.js
+├── events/            # Discord event handlers
+│   ├── guildMemberAdd.js
+|   ├── guildMemberRemove.js
+|   ├── interactionCreate.js
+|   ├── messageCreate.js
+│   └── ready.js
+├── middleware/        # Access control & guild restriction
+│   ├── accessControl.js
+│   └── guildRestriction.js
+├── deploy-commands.js # Slash command registration script
+└── index.js           # Bot entry point
+```
+
+---
+
+## 🔒 Access Control
+
+- Only members of the configured `MAIN_GUILD_ID` server can use commands.
+- Member checks use **live Discord API fetches** (`force: true`) — no stale cache.
+- New joins are detected via `guildMemberAdd` event for instant access.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
+
+---
+
+## 👤 Author
+
+Built by [byigitt](https://github.com/byigitt) · Customized by **Rynex™**

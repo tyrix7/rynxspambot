@@ -19,5 +19,14 @@
     "discord.js": "^14.18.0",
     "dotenv": "^16.4.7",
     "nodemon": "^3.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byigitt/discord-spam-bot.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/byigitt/discord-spam-bot/issues"
+  },
+  "homepage": "https://github.com/byigitt/discord-spam-bot#readme"
 }
