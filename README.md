@@ -16,6 +16,8 @@
 | `/raid` | Channel raid utility |
 | `/dm_raid` | DM raid utility |
 | `/troll_fx` | Ultra-realistic visual troll effects (Fake Hack, Virus Scan, Countdown, Glitch, Crash, ASCII Art) |
+| `/fuck` | you know it very well |Send invisible messages to create a fake clean chat effect.
+| `/cleardm` | Send invisible messages to create a fake clean chat effect. |
 
 ---
 
@@ -35,8 +37,8 @@
 
 **1. Clone the repo:**
 ```bash
-git clone https://github.com/byigitt/discord-spam-bot.git
-cd discord-spam-bot
+git clone https://github.com/Tejas-369-darkoo/rynxspambot.git
+cd rynxspambot
 ```
 
 **2. Install dependencies:**
@@ -138,4 +140,4 @@ This project is licensed under the **MIT License** — see [LICENSE](LICENSE) fo
 
 ## 👤 Author
 
-Built by [byigitt](https://github.com/byigitt) · Customized by **Rynex™**
+Built by [Tejas](https://github.com/Tejas-369-darkoo) for **Rynex™**
