@@ -8,7 +8,7 @@
   <a href="https://nodejs.org/"><img alt="Node.js" src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white"></a>
   <a href="https://discord.js.org/"><img alt="discord.js" src="https://img.shields.io/badge/discord.js-v14-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
   <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-111111?style=for-the-badge"></a>
-  <a href="https://discord.gg/S2QBAxfmkR"><img alt="Discord" src="https://cdn.simpleicons.org/discord/5865F2"></a>
+  <a href="https://discord.gg/S2QBAxfmkR"><img alt="Discord" src="https://img.shields.io/badge/Discord-Join-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
 </p>
 
 Rynex is a Discord slash-command bot built with `discord.js`. It has utility commands, embed tools, fake message rendering, DM/channel test commands, and visual troll-style effects.
