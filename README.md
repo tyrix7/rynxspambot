@@ -1,6 +1,26 @@
-# Rynex™ — Discord Bot
+# Rynex Spam N Raid Bot
 
-> A powerful Discord slash command bot with chaos-themed utilities, troll effects, and server tools.
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=24&duration=2600&pause=700&center=true&vCenter=true&width=760&lines=Rynex+Discord+Bot;Slash+commands%2C+mock+messages%2C+troll+effects;Use+carefully.+Discord+rules+matter." alt="Rynex animated title" />
+</p>
+
+<p align="center">
+  <a href="https://nodejs.org/"><img alt="Node.js" src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white"></a>
+  <a href="https://discord.js.org/"><img alt="discord.js" src="https://img.shields.io/badge/discord.js-v14-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-111111?style=for-the-badge"></a>
+</p>
+
+Rynex is a Discord slash-command bot built with `discord.js`. It has utility commands, embed tools, fake message rendering, DM/channel test commands, and visual troll-style effects.
+
+This project has a chaotic vibe, but use your brain: some commands can annoy people, trigger moderation systems, or break Discord server rules if misused.
+
+## Important Warning
+
+This bot can be against Discord rules if you use it for spam, harassment, raids, unwanted DMs, or anything done without permission.
+
+Use it only in servers you own, test servers, or places where everyone involved has clearly agreed. If your account, bot, server, or application gets limited, banned, reported, rate-limited, nuked, cooked, or otherwise messed up, that is on the person running it.
+
+This repository is provided as-is. The repo owner is not responsible for damage, bans, reports, moderation action, Discord ToS issues, or any misuse. Samajh ja bhai: tool hai, zimmedari teri.
 
 ---
 
