@@ -1,7 +1,7 @@
 # Rynex Spam N Raid Bot
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=24&duration=2600&pause=700&center=true&vCenter=true&width=760&lines=Rynex+Discord+Bot;Slash+commands%2C+mock+messages%2C+troll+effects;Use+carefully.+Discord+rules+matter." alt="Rynex animated title" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=24&duration=2600&pause=700&center=true&vCenter=true&width=760&lines=Rynex+Bot;Slash+commands%2C+mock+messages%2C+troll+effects;Use+carefully.+Discord+rules+matter." alt="Rynex animated title" />
 </p>
 
 <p align="center">
